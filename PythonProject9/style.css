@@ -1,0 +1,453 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Arial', sans-serif;
+}
+
+.calculator {
+    background-color: #2c3e50;
+    padding: 20px;
+    border-radius: 15px;
+    width: 350px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.display {
+    width: 100%;
+    height: 70px;
+    margin-bottom: 20px;
+    font-size: 28px;
+    text-align: right;
+    padding: 0 15px;
+    box-sizing: border-box;
+    border: none;
+    border-radius: 8px;
+    background-color: #34495e;
+    color: #ecf0f1;
+    font-weight: bold;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 12px;
+}
+
+button {
+    height: 60px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #34495e;
+    color: #ecf0f1;
+    transition: all 0.2s;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #4a6572;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Стили для научных функций */
+button:nth-child(-n+8) {
+    background-color: #e67e22;
+    font-size: 16px;
+}
+
+button:nth-child(-n+8):hover {
+    background-color: #d35400;
+}
+
+.equals {
+    background-color: #27ae60;
+    grid-row: span 2;
+}
+
+.equals:hover {
+    background-color: #229954;
+}
+
+.zero {
+    grid-column: span 2;
+}
+
+/* Стиль для кнопки x² */
+button:last-child {
+    background-color: #9b59b6;
+}
+
+button:last-child:hover {
+    background-color: #8e44ad;
+}
+/* Стили для кнопки ВЕРСИЯ ПРОМАКС+ */
+.pro-max-button {
+    width: 100%;
+    height: 50px;
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #ff0000, #ff8000, #ffff00, #80ff00, #00ff00, #00ff80, #00ffff, #0080ff, #0000ff, #8000ff, #ff00ff, #ff0080);
+    background-size: 400% 400%;
+    animation: rainbow 3s ease infinite;
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    transition: transform 0.2s;
+}
+
+.pro-max-button:hover {
+    transform: scale(1.02);
+}
+
+.pro-max-button:active {
+    transform: scale(0.98);
+}
+
+/* Анимация переливающихся цветов */
+@keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+/* Стили для кнопки НЕ НАЖИМАТЬ */
+.dont-press-button {
+    width: 100%;
+    height: 50px;
+    margin-top: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    background: linear-gradient(45deg, #ff0000, #cc0000, #ff4444);
+    color: white;
+    text-shadow: 1px 1px 2px black;
+    transition: all 0.3s;
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.3);
+}
+
+.dont-press-button:hover {
+    background: linear-gradient(45deg, #ff4444, #ff0000, #cc0000);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(255, 0, 0, 0.4);
+}
+
+.dont-press-button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(255, 0, 0, 0.3);
+}
+
+/* Дрожащая анимация при наведении */
+.dont-press-button:hover {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-3px); }
+    75% { transform: translateX(3px); }
+}
+/* Стили для таймера */
+.timer-container {
+    text-align: center;
+    margin-bottom: 10px;
+    padding: 10px;
+    background: linear-gradient(45deg, #ff6b6b, #ff0000);
+    border-radius: 8px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    box-shadow: 0 4px 8px rgba(255, 0, 0, 0.3);
+}
+
+.timer-text {
+    font-size: 16px;
+}
+
+.timer {
+    font-size: 24px;
+    font-weight: bold;
+    color: #fff;
+    text-shadow: 0 0 10px #fff;
+}
+
+/* Класс для летающих кнопок */
+.flying-button {
+    position: fixed !important;
+    z-index: 1000;
+    transition: all 0.5s ease-in-out;
+}
+
+/* Анимация мигания для кнопки предупреждения */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.blink {
+    animation: blink 0.5s infinite;
+}
+/* Анимация безумной смены фона */
+@keyframes crazyBackground {
+    0% { background: linear-gradient(45deg, #ff0000, #00ff00, #0000ff); }
+    10% { background: linear-gradient(135deg, #ffff00, #ff00ff, #00ffff); }
+    20% { background: linear-gradient(225deg, #ff6b6b, #4ecdc4, #45b7d1); }
+    30% { background: linear-gradient(315deg, #96ceb4, #feca57, #ff9ff3); }
+    40% { background: linear-gradient(45deg, #54a0ff, #5f27cd, #00d2d3); }
+    50% { background: linear-gradient(135deg, #ff9f43, #f368e0, #0abde3); }
+    60% { background: linear-gradient(225deg, #ee5253, #ff9f43, #10ac84); }
+    70% { background: linear-gradient(315deg, #00d2d3, #54a0ff, #5f27cd); }
+    80% { background: linear-gradient(45deg, #f368e0, #0abde3, #ff9f43); }
+    90% { background: linear-gradient(135deg, #10ac84, #ee5253, #ff9f43); }
+    100% { background: linear-gradient(225deg, #5f27cd, #00d2d3, #54a0ff); }
+}
+
+.crazy-bg {
+    animation: crazyBackground 1s infinite linear;
+    background-size: 400% 400%;
+}
+
+/* Затемнение для неактивных кнопок */
+.disabled-button {
+    opacity: 0.7 !important;
+    cursor: not-allowed !important;
+    filter: grayscale(50%);
+}
+
+.disabled-button:hover {
+    transform: none !important;
+}
+/* Добавь в конец CSS файла */
+@keyframes zoomInOut {
+    0% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+    20% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+    30% { transform: translate(-50%, -50%) scale(1); }
+    70% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(0.5); opacity: 0; }
+}
+/* Плавные переходы для цветов */
+button, .display {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Убираем стандартные hover-эффекты во время радуги */
+.rainbow-mode button:hover {
+    transform: none !important;
+}
+
+/* Индикатор активной радуги на кнопке косинуса */
+.rainbow-active {
+    animation: pulse 1s infinite;
+    border: 3px solid gold !important;
+}
+
+/* Анимация пульсации для кнопки косинуса */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Анимация для кнопки ln */
+button[onclick*="calculateLn"] {
+    transition: all 0.5s ease-in-out;
+}
+
+/* Эффект тени при падении */
+.falling-button {
+    box-shadow: 0 10px 20px rgba(0,0,0,0.3) !important;
+    transition: all 0.1s linear !important;
+}
+/* Сохраняем место для скрытой кнопки ln */
+button.hidden {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Сохраняем структуру сетки */
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 12px;
+    /* Фиксированная сетка не меняется */
+}
+
+/* Убедимся что все кнопки одинакового размера */
+.buttons button {
+    min-height: 60px;
+    box-sizing: border-box;
+}
+
+/* Стиль для навсегда скрытой кнопки */
+button.hidden-permanently {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    cursor: default !important;
+}
+
+@keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Анимации для безумного режима */
+@keyframes vibrate {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
+}
+
+@keyframes crazyBackground {
+    0% { filter: hue-rotate(0deg); }
+    100% { filter: hue-rotate(360deg); }
+}
+
+@keyframes flash {
+    0%, 100% { background: white; }
+    50% { background: yellow; }
+}
+
+@keyframes floatUp {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-100px) scale(0.5); opacity: 0; }
+}
+
+@keyframes rainbow {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Стили для игрового автомата */
+.slot-machine-display {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.slot-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    background: #000;
+    padding: 20px;
+    border-radius: 10px;
+    border: 3px solid #ffd700;
+}
+
+.slot-reel {
+    width: 80px;
+    height: 100px; /* Высота одного элемента */
+    overflow: hidden;
+    position: relative;
+    background: linear-gradient(45deg, #2c3e50, #34495e);
+    border: 2px solid #ffd700;
+    border-radius: 10px;
+}
+
+.slot-item {
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    font-weight: bold;
+    color: #ffd700;
+    text-shadow: 0 0 10px #ff6b00;
+}
+
+/* Контейнер для всех элементов барабана */
+.slot-reel-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+}
+
+.spin-button {
+    width: 200px;
+    height: 60px;
+    font-size: 24px;
+    font-weight: bold;
+    background: linear-gradient(45deg, #ff6b00, #ffd700);
+    color: #000;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 20px auto;
+    display: block;
+    transition: transform 0.3s;
+}
+
+.spin-button:hover {
+    transform: scale(1.05);
+    background: linear-gradient(45deg, #ffd700, #ff6b00);
+}
+
+.spin-button:active {
+    transform: scale(0.95);
+}
+
+.balance-display {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #ffd700;
+    margin-bottom: 15px;
+    text-shadow: 0 0 10px #ff6b00;
+}
+
+.balance-display.low {
+    color: #ff4444;
+    animation: pulse 1s infinite;
+}
+
+.result-display {
+    font-size: 24px;
+    font-weight: bold;
+    padding: 15px;
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+.result-display.win {
+    background: linear-gradient(45deg, #00b300, #00ff00);
+    color: #000;
+    animation: winPulse 0.5s 3;
+}
+
+.result-display.lose {
+    background: linear-gradient(45deg, #8B0000, #ff4444);
+    color: white;
+}
+
+/* Анимации для автомата */
+@keyframes winPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes flyMoney {
+    0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
