@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Научный калькулятор</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator">
+        <div class="timer-container" id="timerContainer" style="display: none;">
+        <span class="timer-text">До хаоса: </span>
+        <span class="timer" id="timer">30</span>
+        <span class="timer-text">сек</span>
+    </div>
+
+        <input type="text" class="display" id="display" readonly>
+        <button class="pro-max-button" onclick="showProMaxMessage()">ВЕРСИЯ ПРОМАКС+</button>
+
+        <div class="buttons">
+            <!-- Первый ряд - научные функции с немедленным вычислением -->
+            <button onclick="calculateSin()">sin</button>
+            <button onclick="calculateCos()">cos</button>
+            <button onclick="calculateTan()">tan</button>
+            <button onclick="calculateSqrt()">√</button>
+
+            <!-- Второй ряд - научные функции -->
+            <button onclick="calculateLn()">ln</button>
+            <button onclick="calculateLog()">log</button>
+            <button onclick="addPi()">π</button>
+            <button onclick="calculatePower()">x^y</button>
+
+            <!-- Третий ряд - основные операции -->
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="deleteLast()">⌫</button>
+            <button onclick="appendToDisplay('/')">/</button>
+            <button onclick="appendToDisplay('*')">×</button>
+
+            <!-- Четвертый ряд - цифры -->
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="appendToDisplay('-')">-</button>
+
+            <!-- Пятый ряд - цифры -->
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('+')">+</button>
+
+            <!-- Шестой ряд - цифры и равно -->
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="calculate()" class="equals" rowspan="2">=</button>
+
+            <!-- Седьмой ряд - ноль и дополнительные функции -->
+            <button onclick="appendToDisplay('0')" class="zero">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="calculateSquare()">x²</button>
+        </div>
+         <button class="dont-press-button" onclick="dontPressButton()">НЕ НАЖИМАТЬ</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
